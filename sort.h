@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stddef.h>
+#include <string.h>
+
+/* Structure Definition */
 
 /**
  * struct listint_s - Doubly linked list node
@@ -14,22 +16,23 @@
  */
 typedef struct listint_s
 {
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
+	const int n;
+	struct listint_s *prev;
+	struct listint_s *next;
 } listint_t;
+
+/* Function Prototypes */
 
 void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
+void partition(int *array, int low, int high, size_t size);
+
+void array_swap(int *array, int a, int b);
+void list_swap(listint_t **list);
+
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-void swap_head(listint_t **list, listint_t *aux);
-void swap_middle(listint_t *aux);
-void swap_tail(listint_t *aux);
-void swap(int *x, int *y);
-void quicksort_recursioin(int *array, int start, int end, size_t size);
-int partition(int *array, int low, int high, size_t size);
 
 #endif
