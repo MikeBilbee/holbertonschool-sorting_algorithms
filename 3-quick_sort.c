@@ -1,77 +1,71 @@
 #include "sort.h"
 
 /**
-*swap - Swaps two integers
-*@x: int
-*@y: int
-*Return: Swapped int, void.
-*/
+ * quick_sort - Implementation of Quicksort algorithm
+ * @array: pointer to array of integers
+ * @size: size of array
+ *
+ * Return: Void
+ */
 
-void swap(int *x, int *y)
-{
-int tmp;
-
-tmp = *x;
-*x = *y;
-*y = tmp;
-}
-
-
-/**
-* partition - Partition an array using pivot
-* @array: Array
-* @start: int
-* @end: int
-* @size: size of array (size_t)
-* Return: index of pivote
-*/
-
-int partition(int *array, int start, int end, size_t size)
-{
-int pivot_value = array[end];
-int i = start - 1, j;
-for (j = start; j <= end; j++)
-{
-if (array[j] <= pivot_value)
-{
-i++;
-if (i != j)
-{
-swap(&array[i], &array[j]);
-print_array(array, size);
-}
-}
-}
-return (i);
-}
-
-/**
-* quicksort_recursion - Sorts recursively an Array
-* @array: Array to be sorted
-* @start: The lowest value of the array
-* @end: highest value of the array
-* @size: Size of The Array
-* Return: void
-*/
-
-void quicksort_recursion(int *array, int start, int end, size_t size)
-{
-int x;
-if (start < end)
-{
-x = partition(array, start, end, size);
-quicksort_recursion(array, start, x - 1, size);
-quicksort_recursion(array, x + 1, end, size);
-}
-}
-
-/**
-* quick_sort - Quick Sort Algorithm using lomuto partition
-* @array: Array to sort
-* @size: Size of The Array
-* Return: Sorted Array, void
-*/
 void quick_sort(int *array, size_t size)
 {
-quicksort_recursion(array, 0, size - 1, size);
+	if (size < 2)
+		return;
+
+	partition(array, 0, (int)size - 1, size);
+}
+
+/**
+ * partition - creates partition and sorts recursively
+ * @array: array to sort
+ * @low: index of starting element of list
+ * @high: index of last element of list
+ * @size: size of original array
+ */
+void partition(int *array, int low, int high, size_t size)
+{
+	int pivot = array[high], i, j = low;
+
+	if (low >= high)
+		return;
+
+	for (i = low; i < high; i++)
+	{
+		if (array[i] <= pivot)
+		{
+			if (i != j)
+			{
+				array_swap(array, i, j);
+				print_array(array, size);
+			}
+			j++;
+		}
+	}
+	if (j != high)
+	{
+		array_swap(array, high, j);
+		print_array(array, size);
+	}
+
+	partition(array, low, j - 1, size);
+	partition(array, j + 1, high, size);
+}
+
+/**
+ * array_swap - swaps two integers in an array
+ * @array: array to be sorted
+ * @a: index of first integer
+ * @b: index of second integer
+ *
+ * Return: Void
+ */
+
+void array_swap(int *array, int a, int b)
+{
+	int temp;
+
+	temp = array[a];
+	array[a] = array[b];
+	array[b] = temp;
 }
