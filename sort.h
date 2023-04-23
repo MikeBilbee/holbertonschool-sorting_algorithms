@@ -28,7 +28,7 @@ void print_list(const listint_t *list);
 void partition(int *array, int low, int high, size_t size);
 
 void array_swap(int *array, int a, int b);
-void list_swap(listint_t **list);
+void list_swap(listint_t **list, listint_t *curr);
 
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
